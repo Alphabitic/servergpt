@@ -1,6 +1,6 @@
 import express from 'express'
 import * as dotenv from 'dotenv'
-import cors from 'cors'
+const cors = require('cors');
 import { Configuration, OpenAIApi } from 'openai'
 
 dotenv.config()
@@ -11,8 +11,12 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+app.use(cors({
+  origin: 'https://servergpt-6leu-2lfd1jlxi-alphabitic.vercel.app'
+}));
+
 const app = express()
-app.use(cors())
+
 app.use(express.json())
 
 app.get('/', async (req, res) => {
